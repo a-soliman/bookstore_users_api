@@ -1,1 +1,29 @@
 package services
+
+import (
+	"github.com/a-soliman/bookstore_users_api/domain/users"
+	"github.com/a-soliman/bookstore_users_api/utils/errors"
+)
+
+// CreateUser creates a new user
+func CreateUser(user *users.User) (*users.User, *errors.RestErr) {
+	// validate user
+	if err := user.Validate(); err != nil {
+		return nil, err
+	}
+
+	// attempt to save the user
+	if err := user.Save(); err != nil {
+		return nil, err
+	}
+	return user, nil
+}
+
+// GetUser gets user by id
+func GetUser(userID int64) (*users.User, *errors.RestErr) {
+	user := &users.User{ID: userID}
+	if err := user.Get(); err != nil {
+		return nil, err
+	}
+	return user, nil
+}
