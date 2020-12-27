@@ -10,12 +10,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-// GetUser finds a user by id
-func GetUser(c *gin.Context) {
-	userID, err := strconv.ParseInt(c.Param("user_id"), 10, 64)
+func getUserID(userIDParam string) (int64, *errors.RestErr) {
+	userID, err := strconv.ParseInt(userIDParam, 10, 64)
 	if err != nil {
-		userErr := errors.NewBadRequestError("invalid user id")
-		c.JSON(userErr.Status, userErr)
+		return 0, errors.NewBadRequestError("invalid user id")
+	}
+	return userID, nil
+}
+
+// Get finds a user by id
+func Get(c *gin.Context) {
+	userID, idErr := getUserID(c.Param("user_id"))
+	if idErr != nil {
+		c.JSON(idErr.Status, idErr)
 		return
 	}
 	result, userErr := services.GetUser(userID)
@@ -26,8 +33,8 @@ func GetUser(c *gin.Context) {
 	c.JSON(http.StatusOK, result)
 }
 
-// CreateUser creates a new user
-func CreateUser(c *gin.Context) {
+// Create creates a new user
+func Create(c *gin.Context) {
 	var user users.User
 
 	// read the body from request, and bind user JSON
@@ -45,12 +52,11 @@ func CreateUser(c *gin.Context) {
 	c.JSON(http.StatusCreated, result)
 }
 
-// UpdateUser updates a user entity
-func UpdateUser(c *gin.Context) {
-	userID, err := strconv.ParseInt(c.Param("user_id"), 10, 64)
-	if err != nil {
-		userErr := errors.NewBadRequestError("invalid user id")
-		c.JSON(userErr.Status, userErr)
+// Update updates a user entity
+func Update(c *gin.Context) {
+	userID, idErr := getUserID(c.Param("user_id"))
+	if idErr != nil {
+		c.JSON(idErr.Status, idErr)
 		return
 	}
 
@@ -75,12 +81,11 @@ func UpdateUser(c *gin.Context) {
 	c.JSON(http.StatusCreated, result)
 }
 
-// DeleteUser delete a given user
-func DeleteUser(c *gin.Context) {
-	userID, err := strconv.ParseInt(c.Param("user_id"), 10, 64)
-	if err != nil {
-		userErr := errors.NewBadRequestError("invalid user id")
-		c.JSON(userErr.Status, userErr)
+// Delete delete a given user
+func Delete(c *gin.Context) {
+	userID, idErr := getUserID(c.Param("user_id"))
+	if idErr != nil {
+		c.JSON(idErr.Status, idErr)
 		return
 	}
 
