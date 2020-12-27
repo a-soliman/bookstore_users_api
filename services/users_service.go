@@ -2,6 +2,8 @@ package services
 
 import (
 	"github.com/a-soliman/bookstore_users_api/domain/users"
+	"github.com/a-soliman/bookstore_users_api/utils/crypto_utils"
+	"github.com/a-soliman/bookstore_users_api/utils/dates"
 	"github.com/a-soliman/bookstore_users_api/utils/errors"
 )
 
@@ -14,12 +16,22 @@ func GetUser(userID int64) (*users.User, *errors.RestErr) {
 	return user, nil
 }
 
+// Search returns a list of users and an error
+func Search(status string) (*users.Users, *errors.RestErr) {
+	var dao users.User
+	return dao.FindByStatus(status)
+}
+
 // CreateUser creates a new user
 func CreateUser(user *users.User) (*users.User, *errors.RestErr) {
 	// validate user
 	if err := user.Validate(); err != nil {
 		return nil, err
 	}
+
+	user.Status = users.StatusActive
+	user.CreatedAt = dates.GetNowDBFormat()
+	user.Password = crypto_utils.GetMd5(user.Password)
 
 	// attempt to save the user
 	if err := user.Save(); err != nil {

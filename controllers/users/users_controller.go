@@ -1,8 +1,10 @@
 package users
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 
 	"github.com/a-soliman/bookstore_users_api/domain/users"
 	"github.com/a-soliman/bookstore_users_api/services"
@@ -30,7 +32,24 @@ func Get(c *gin.Context) {
 		c.JSON(userErr.Status, userErr)
 		return
 	}
-	c.JSON(http.StatusOK, result)
+	c.JSON(http.StatusOK, result.Marshall(c.GetHeader("X-PUBLIC") == "true"))
+}
+
+// Search finds a list of users by given search query
+func Search(c *gin.Context) {
+	status := strings.TrimSpace(c.Query("status"))
+	fmt.Println(status)
+	if status == "" {
+		err := errors.NewBadRequestError("missing status")
+		c.JSON(err.Status, err)
+		return
+	}
+	result, findErr := services.Search(status)
+	if findErr != nil {
+		c.JSON(findErr.Status, findErr)
+		return
+	}
+	c.JSON(http.StatusOK, result.Marshall(c.GetHeader("X-PUBLIC") == "true"))
 }
 
 // Create creates a new user
@@ -49,7 +68,7 @@ func Create(c *gin.Context) {
 		c.JSON(saveErr.Status, saveErr)
 		return
 	}
-	c.JSON(http.StatusCreated, result)
+	c.JSON(http.StatusCreated, result.Marshall(c.GetHeader("X-PUBLIC") == "true"))
 }
 
 // Update updates a user entity
@@ -78,7 +97,7 @@ func Update(c *gin.Context) {
 		c.JSON(updateErr.Status, updateErr)
 		return
 	}
-	c.JSON(http.StatusCreated, result)
+	c.JSON(http.StatusCreated, result.Marshall(c.GetHeader("X-PUBLIC") == "true"))
 }
 
 // Delete delete a given user
@@ -96,5 +115,5 @@ func Delete(c *gin.Context) {
 		c.JSON(deleteErr.Status, deleteErr)
 		return
 	}
-	c.JSON(http.StatusOK, result)
+	c.JSON(http.StatusOK, result.Marshall(c.GetHeader("X-PUBLIC") == "true"))
 }
