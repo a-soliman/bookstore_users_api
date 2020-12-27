@@ -7,8 +7,23 @@ import (
 	"github.com/a-soliman/bookstore_users_api/utils/errors"
 )
 
+var (
+	// UsersService the usersService
+	UsersService userServiceInterface = &usersService{}
+)
+
+type usersService struct{}
+
+type userServiceInterface interface {
+	GetUser(int64) (*users.User, *errors.RestErr)
+	SearchUser(string) (*users.Users, *errors.RestErr)
+	CreateUser(*users.User) (*users.User, *errors.RestErr)
+	UpdateUser(bool, *users.User) (*users.User, *errors.RestErr)
+	DeleteUser(*users.User) (*users.User, *errors.RestErr)
+}
+
 // GetUser gets user by id
-func GetUser(userID int64) (*users.User, *errors.RestErr) {
+func (us *usersService) GetUser(userID int64) (*users.User, *errors.RestErr) {
 	user := &users.User{ID: userID}
 	if err := user.Get(); err != nil {
 		return nil, err
@@ -17,13 +32,13 @@ func GetUser(userID int64) (*users.User, *errors.RestErr) {
 }
 
 // Search returns a list of users and an error
-func Search(status string) (*users.Users, *errors.RestErr) {
+func (us *usersService) SearchUser(status string) (*users.Users, *errors.RestErr) {
 	var dao users.User
 	return dao.FindByStatus(status)
 }
 
 // CreateUser creates a new user
-func CreateUser(user *users.User) (*users.User, *errors.RestErr) {
+func (us *usersService) CreateUser(user *users.User) (*users.User, *errors.RestErr) {
 	// validate user
 	if err := user.Validate(); err != nil {
 		return nil, err
@@ -41,9 +56,9 @@ func CreateUser(user *users.User) (*users.User, *errors.RestErr) {
 }
 
 // UpdateUser updates a user entity
-func UpdateUser(isPartial bool, user *users.User) (*users.User, *errors.RestErr) {
+func (us *usersService) UpdateUser(isPartial bool, user *users.User) (*users.User, *errors.RestErr) {
 	// fetch current user entity
-	current, err := GetUser(user.ID)
+	current, err := us.GetUser(user.ID)
 	if err != nil {
 		return nil, err
 	}
@@ -72,8 +87,8 @@ func UpdateUser(isPartial bool, user *users.User) (*users.User, *errors.RestErr)
 }
 
 // DeleteUser deletes a user from DB and returns the deletedUser or err
-func DeleteUser(user *users.User) (*users.User, *errors.RestErr) {
-	user, err := GetUser(user.ID)
+func (us *usersService) DeleteUser(user *users.User) (*users.User, *errors.RestErr) {
+	user, err := us.GetUser(user.ID)
 	if err != nil {
 		return nil, err
 	}
