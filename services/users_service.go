@@ -29,21 +29,28 @@ func CreateUser(user *users.User) (*users.User, *errors.RestErr) {
 }
 
 // UpdateUser updates a user entity
-func UpdateUser(user *users.User) (*users.User, *errors.RestErr) {
-	// validate user
-	if err := user.Validate(); err != nil {
-		return nil, err
-	}
-
+func UpdateUser(isPartial bool, user *users.User) (*users.User, *errors.RestErr) {
 	// fetch current user entity
 	current, err := GetUser(user.ID)
 	if err != nil {
 		return nil, err
 	}
 
-	current.FirstName = user.FirstName
-	current.LastName = user.LastName
-	current.Email = user.Email
+	if isPartial {
+		if user.FirstName != "" {
+			current.FirstName = user.FirstName
+		}
+		if user.LastName != "" {
+			current.LastName = user.LastName
+		}
+		if err := user.Validate(); err == nil {
+			current.Email = user.Email
+		}
+	} else {
+		current.FirstName = user.FirstName
+		current.LastName = user.LastName
+		current.Email = user.Email
+	}
 
 	// attempt to update the user
 	if err := user.Update(); err != nil {
