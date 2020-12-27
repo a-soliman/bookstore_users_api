@@ -2,6 +2,11 @@ package errors
 
 import "net/http"
 
+const (
+	// DatabaseErrorMsg string
+	DatabaseErrorMsg = "database error"
+)
+
 // RestErr a unified common error struct
 type RestErr struct {
 	Message string `json:"message"`
