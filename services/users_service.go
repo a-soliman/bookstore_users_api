@@ -5,6 +5,15 @@ import (
 	"github.com/a-soliman/bookstore_users_api/utils/errors"
 )
 
+// GetUser gets user by id
+func GetUser(userID int64) (*users.User, *errors.RestErr) {
+	user := &users.User{ID: userID}
+	if err := user.Get(); err != nil {
+		return nil, err
+	}
+	return user, nil
+}
+
 // CreateUser creates a new user
 func CreateUser(user *users.User) (*users.User, *errors.RestErr) {
 	// validate user
@@ -19,11 +28,26 @@ func CreateUser(user *users.User) (*users.User, *errors.RestErr) {
 	return user, nil
 }
 
-// GetUser gets user by id
-func GetUser(userID int64) (*users.User, *errors.RestErr) {
-	user := &users.User{ID: userID}
-	if err := user.Get(); err != nil {
+// UpdateUser updates a user entity
+func UpdateUser(user *users.User) (*users.User, *errors.RestErr) {
+	// validate user
+	if err := user.Validate(); err != nil {
 		return nil, err
 	}
-	return user, nil
+
+	// fetch current user entity
+	current, err := GetUser(user.ID)
+	if err != nil {
+		return nil, err
+	}
+
+	current.FirstName = user.FirstName
+	current.LastName = user.LastName
+	current.Email = user.Email
+
+	// attempt to update the user
+	if err := user.Update(); err != nil {
+		return nil, err
+	}
+	return current, nil
 }

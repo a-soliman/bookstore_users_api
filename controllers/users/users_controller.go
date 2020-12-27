@@ -44,3 +44,31 @@ func CreateUser(c *gin.Context) {
 	}
 	c.JSON(http.StatusCreated, result)
 }
+
+// UpdateUser updates a user entity
+func UpdateUser(c *gin.Context) {
+	userID, err := strconv.ParseInt(c.Param("user_id"), 10, 64)
+	if err != nil {
+		userErr := errors.NewBadRequestError("invalid user id")
+		c.JSON(userErr.Status, userErr)
+		return
+	}
+
+	var user users.User
+
+	// read the body from request, and bind user JSON
+	if err := c.ShouldBindJSON(&user); err != nil {
+		jsonErr := errors.NewBadRequestError("invalid json body")
+		c.JSON(jsonErr.Status, jsonErr)
+		return
+	}
+
+	user.ID = userID
+
+	result, updateErr := services.UpdateUser(&user)
+	if updateErr != nil {
+		c.JSON(updateErr.Status, updateErr)
+		return
+	}
+	c.JSON(http.StatusCreated, result)
+}

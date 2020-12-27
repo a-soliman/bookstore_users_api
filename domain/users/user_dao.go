@@ -12,6 +12,7 @@ import (
 const (
 	queryInsertUser = "INSERT INTO users(first_name, last_name, email, created_at) VALUES(?, ?, ?, ?);"
 	queryGetUser    = "SELECT id, first_name, last_name, email, created_at FROM users WHERE id=?;"
+	queryUpdateUser = "UPDATE users SET first_name=?, last_name=?, email=? WHERE id=?;"
 )
 
 var (
@@ -55,5 +56,20 @@ func (u *User) Save() *errors.RestErr {
 		return errors.NewInternalServerError(fmt.Sprintf("error while trying to save user: %s", err.Error()))
 	}
 	u.ID = userID
+	return nil
+}
+
+// Update updates the user entity
+func (u *User) Update() *errors.RestErr {
+	stmt, err := users_db.Client.Prepare(queryUpdateUser)
+	if err != nil {
+		return errors.NewInternalServerError(err.Error())
+	}
+	defer stmt.Close()
+
+	_, updateErr := stmt.Exec(u.FirstName, u.LastName, u.Email, u.ID)
+	if updateErr != nil {
+		return mysql_utils.ParseError(updateErr)
+	}
 	return nil
 }
