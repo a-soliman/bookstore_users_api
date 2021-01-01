@@ -2,6 +2,7 @@ package users
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/a-soliman/bookstore_users_api/datasources/mysql/users_db"
 	"github.com/a-soliman/bookstore_users_api/logger"
@@ -9,11 +10,12 @@ import (
 )
 
 const (
-	queryInsertUser       = "INSERT INTO users(first_name, last_name, email, created_at, password, status) VALUES(?, ?, ?, ?, ?, ?);"
-	queryGetUser          = "SELECT id, first_name, last_name, email, created_at, status FROM users WHERE id=?;"
-	queryUpdateUser       = "UPDATE users SET first_name=?, last_name=?, email=? WHERE id=?;"
-	queryDeleteUser       = "DELETE FROM users WHERE id=?;"
-	queryFindUserByStatus = "SELECT id, first_name, last_name, email, created_at, status FROM users WHERE status=?"
+	queryInsertUser            = "INSERT INTO users(first_name, last_name, email, created_at, password, status) VALUES(?, ?, ?, ?, ?, ?);"
+	queryGetUser               = "SELECT id, first_name, last_name, email, created_at, status FROM users WHERE id=?;"
+	queryUpdateUser            = "UPDATE users SET first_name=?, last_name=?, email=? WHERE id=?;"
+	queryDeleteUser            = "DELETE FROM users WHERE id=?;"
+	queryFindByStatus          = "SELECT id, first_name, last_name, email, created_at, status FROM users WHERE status=?"
+	queryFindByEmailAndPasword = "SELECT id, first_name, last_name, email, created_at, status FROM users WHERE email=? AND password=? AND status=?;"
 )
 
 var (
@@ -40,7 +42,7 @@ func (u *User) Get() *errors.RestErr {
 
 // FindByStatus given a status string it returns a slice of users and a restErr
 func (u *User) FindByStatus(status string) (*Users, *errors.RestErr) {
-	stmt, err := users_db.Client.Prepare(queryFindUserByStatus)
+	stmt, err := users_db.Client.Prepare(queryFindByStatus)
 	if err != nil {
 		logger.Error("error while trying to prepare find user statement", err)
 		return nil, errors.NewInternalServerError(errors.DatabaseErrorMsg)
@@ -67,6 +69,27 @@ func (u *User) FindByStatus(status string) (*Users, *errors.RestErr) {
 		return nil, errors.NewNotFoundError(fmt.Sprintf("no users matching status %s", status))
 	}
 	return &results, nil
+}
+
+// FindByEmailAndPassword fetches a user by email and password from database
+func (u *User) FindByEmailAndPassword() *errors.RestErr {
+	stmt, err := users_db.Client.Prepare(queryFindByEmailAndPasword)
+	if err != nil {
+		logger.Error("error while trying to prepare find user by email and password statement", err)
+		return errors.NewInternalServerError(errors.DatabaseErrorMsg)
+	}
+	defer stmt.Close()
+
+	result := stmt.QueryRow(u.Email, u.Password, StatusActive)
+	if getErr := result.Scan(&u.ID, &u.FirstName, &u.LastName, &u.Email, &u.CreatedAt, &u.Status); getErr != nil {
+		if strings.Contains(getErr.Error(), "no rows in result set") {
+			return errors.NewNotFoundError("invalid user credentials")
+		}
+		logger.Error("error while trying to find user by email and password", getErr)
+		return errors.NewInternalServerError(errors.DatabaseErrorMsg)
+	}
+
+	return nil
 }
 
 // Save persists a given user into the database

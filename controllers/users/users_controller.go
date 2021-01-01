@@ -52,6 +52,24 @@ func Search(c *gin.Context) {
 	c.JSON(http.StatusOK, result.Marshall(c.GetHeader("X-PUBLIC") == "true"))
 }
 
+// Login logs user in by email and password
+func Login(c *gin.Context) {
+	var request users.LoginRequest
+
+	if err := c.ShouldBindJSON(&request); err != nil {
+		jsonErr := errors.NewBadRequestError("invalid json body")
+		c.JSON(jsonErr.Status, jsonErr)
+		return
+	}
+
+	user, loginErr := services.UsersService.LoginUser(request)
+	if loginErr != nil {
+		c.JSON(loginErr.Status, loginErr)
+		return
+	}
+	c.JSON(http.StatusOK, user.Marshall(c.GetHeader("X-PUBLIC") == "true"))
+}
+
 // Create creates a new user
 func Create(c *gin.Context) {
 	var user users.User
