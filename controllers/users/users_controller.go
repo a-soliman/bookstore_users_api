@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/a-soliman/bookstore_oauth-go/oauth"
 	"github.com/a-soliman/bookstore_users_api/domain/users"
 	"github.com/a-soliman/bookstore_users_api/services"
 	"github.com/a-soliman/bookstore_users_api/utils/errors"
@@ -22,17 +23,27 @@ func getUserID(userIDParam string) (int64, *errors.RestErr) {
 
 // Get finds a user by id
 func Get(c *gin.Context) {
+	if err := oauth.AuthenticateRequest(c.Request); err != nil {
+		c.JSON(err.Status, err)
+		return
+	}
+
 	userID, idErr := getUserID(c.Param("user_id"))
 	if idErr != nil {
 		c.JSON(idErr.Status, idErr)
 		return
 	}
-	result, userErr := services.UsersService.GetUser(userID)
+	user, userErr := services.UsersService.GetUser(userID)
 	if userErr != nil {
 		c.JSON(userErr.Status, userErr)
 		return
 	}
-	c.JSON(http.StatusOK, result.Marshall(c.GetHeader("X-PUBLIC") == "true"))
+	// if the user is asking for their personal information, returns the private version of user data
+	if oauth.GetCallerID(c.Request) == userID {
+		c.JSON(http.StatusOK, user.Marshall(false))
+		return
+	}
+	c.JSON(http.StatusOK, user.Marshall(oauth.IsPublic(c.Request)))
 }
 
 // Search finds a list of users by given search query
