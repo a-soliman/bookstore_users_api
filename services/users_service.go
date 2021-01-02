@@ -2,8 +2,8 @@ package services
 
 import (
 	"github.com/a-soliman/bookstore_users_api/domain/users"
-	"github.com/a-soliman/bookstore_users_api/utils/crypto_utils"
 	"github.com/a-soliman/bookstore_users_api/utils/dates"
+	"github.com/a-soliman/bookstore_utils-go/crypto_utils"
 	"github.com/a-soliman/bookstore_utils-go/rest_errors"
 )
 
