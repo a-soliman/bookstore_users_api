@@ -4,7 +4,7 @@ import (
 	"github.com/a-soliman/bookstore_users_api/domain/users"
 	"github.com/a-soliman/bookstore_users_api/utils/crypto_utils"
 	"github.com/a-soliman/bookstore_users_api/utils/dates"
-	"github.com/a-soliman/bookstore_users_api/utils/errors"
+	"github.com/a-soliman/bookstore_utils-go/rest_errors"
 )
 
 var (
@@ -15,16 +15,16 @@ var (
 type usersService struct{}
 
 type userServiceInterface interface {
-	GetUser(int64) (*users.User, *errors.RestErr)
-	SearchUser(string) (*users.Users, *errors.RestErr)
-	CreateUser(*users.User) (*users.User, *errors.RestErr)
-	UpdateUser(bool, *users.User) (*users.User, *errors.RestErr)
-	DeleteUser(*users.User) (*users.User, *errors.RestErr)
-	LoginUser(users.LoginRequest) (*users.User, *errors.RestErr)
+	GetUser(int64) (*users.User, *rest_errors.RestErr)
+	SearchUser(string) (*users.Users, *rest_errors.RestErr)
+	CreateUser(*users.User) (*users.User, *rest_errors.RestErr)
+	UpdateUser(bool, *users.User) (*users.User, *rest_errors.RestErr)
+	DeleteUser(*users.User) (*users.User, *rest_errors.RestErr)
+	LoginUser(users.LoginRequest) (*users.User, *rest_errors.RestErr)
 }
 
 // GetUser gets user by id
-func (us *usersService) GetUser(userID int64) (*users.User, *errors.RestErr) {
+func (us *usersService) GetUser(userID int64) (*users.User, *rest_errors.RestErr) {
 	user := &users.User{ID: userID}
 	if err := user.Get(); err != nil {
 		return nil, err
@@ -33,12 +33,12 @@ func (us *usersService) GetUser(userID int64) (*users.User, *errors.RestErr) {
 }
 
 // Search returns a list of users and an error
-func (us *usersService) SearchUser(status string) (*users.Users, *errors.RestErr) {
+func (us *usersService) SearchUser(status string) (*users.Users, *rest_errors.RestErr) {
 	var dao users.User
 	return dao.FindByStatus(status)
 }
 
-func (us *usersService) LoginUser(request users.LoginRequest) (*users.User, *errors.RestErr) {
+func (us *usersService) LoginUser(request users.LoginRequest) (*users.User, *rest_errors.RestErr) {
 	dao := &users.User{
 		Email:    request.Email,
 		Password: crypto_utils.GetMd5(request.Password),
@@ -51,7 +51,7 @@ func (us *usersService) LoginUser(request users.LoginRequest) (*users.User, *err
 }
 
 // CreateUser creates a new user
-func (us *usersService) CreateUser(user *users.User) (*users.User, *errors.RestErr) {
+func (us *usersService) CreateUser(user *users.User) (*users.User, *rest_errors.RestErr) {
 	// validate user
 	if err := user.Validate(); err != nil {
 		return nil, err
@@ -69,7 +69,7 @@ func (us *usersService) CreateUser(user *users.User) (*users.User, *errors.RestE
 }
 
 // UpdateUser updates a user entity
-func (us *usersService) UpdateUser(isPartial bool, user *users.User) (*users.User, *errors.RestErr) {
+func (us *usersService) UpdateUser(isPartial bool, user *users.User) (*users.User, *rest_errors.RestErr) {
 	// fetch current user entity
 	current, err := us.GetUser(user.ID)
 	if err != nil {
@@ -100,7 +100,7 @@ func (us *usersService) UpdateUser(isPartial bool, user *users.User) (*users.Use
 }
 
 // DeleteUser deletes a user from DB and returns the deletedUser or err
-func (us *usersService) DeleteUser(user *users.User) (*users.User, *errors.RestErr) {
+func (us *usersService) DeleteUser(user *users.User) (*users.User, *rest_errors.RestErr) {
 	user, err := us.GetUser(user.ID)
 	if err != nil {
 		return nil, err
