@@ -4,6 +4,9 @@ github.com/a-soliman/bookstore_oauth-go v0.0.0-20210102195911-2115647fb2b6 h1:Nw
 github.com/a-soliman/bookstore_oauth-go v0.0.0-20210102195911-2115647fb2b6/go.mod h1:uchnHhMxh+VVSGIjDQnqq1wJGg2sRCVu14+RmtzK8xM=
 github.com/a-soliman/bookstore_utils-go v0.0.0-20210102225544-cab655ccc3e3 h1:CBy0QhkR2+tvjjAF1zWcr/dFk3TYPRZ0Jyi68RvQcMw=
 github.com/a-soliman/bookstore_utils-go v0.0.0-20210102225544-cab655ccc3e3/go.mod h1:AYGkz4gURZfPn6Uknd8S98fRPZTQr8JiSWN8K6JX1ik=
+github.com/a-soliman/bookstore_utils-go v0.0.0-20210102230933-01cf27412dbe h1:W5OwCx2ztky8P2o4xK+rZKpN/p+xMny5kmMSwbv5pBY=
+github.com/a-soliman/bookstore_utils-go v0.0.0-20210103182619-8fdde342f535 h1:kDTavQnBDcFGHJPtyVN/mnOk9pa3T+wPaVkZRpfjHrs=
+github.com/a-soliman/bookstore_utils-go v0.0.0-20210103182619-8fdde342f535/go.mod h1:AYGkz4gURZfPn6Uknd8S98fRPZTQr8JiSWN8K6JX1ik=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

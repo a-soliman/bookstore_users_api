@@ -2,8 +2,8 @@ package services
 
 import (
 	"github.com/a-soliman/bookstore_users_api/domain/users"
-	"github.com/a-soliman/bookstore_users_api/utils/dates"
 	"github.com/a-soliman/bookstore_utils-go/crypto_utils"
+	"github.com/a-soliman/bookstore_utils-go/date_utils"
 	"github.com/a-soliman/bookstore_utils-go/rest_errors"
 )
 
@@ -58,7 +58,7 @@ func (us *usersService) CreateUser(user *users.User) (*users.User, *rest_errors.
 	}
 
 	user.Status = users.StatusActive
-	user.CreatedAt = dates.GetNowDBFormat()
+	user.CreatedAt = date_utils.GetNowDBFormat()
 	user.Password = crypto_utils.GetMd5(user.Password)
 
 	// attempt to save the user
