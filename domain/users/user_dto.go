@@ -26,7 +26,7 @@ type User struct {
 type Users []*User
 
 // Validate returns a pointer to an error if the given user is invalid
-func (u *User) Validate() *rest_errors.RestErr {
+func (u *User) Validate() rest_errors.RestErr {
 	u.FirstName = strings.TrimSpace(u.FirstName)
 	if u.FirstName == "" {
 		return rest_errors.NewBadRequestError("firstname is required")

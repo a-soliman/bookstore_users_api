@@ -12,7 +12,7 @@ const (
 )
 
 // ParseError given an error it trys to convert it to mySqlError, and returns the appropriate restErr
-func ParseError(err error) *rest_errors.RestErr {
+func ParseError(err error) rest_errors.RestErr {
 	sqlErr, ok := err.(*mysql.MySQLError)
 	if !ok {
 		if strings.Contains(err.Error(), errorNoRows) {
