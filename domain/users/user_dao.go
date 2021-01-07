@@ -6,7 +6,7 @@ import (
 
 	"github.com/a-soliman/bookstore_oauth-go/oauth/errors"
 	"github.com/a-soliman/bookstore_users_api/datasources/mysql/users_db"
-	"github.com/a-soliman/bookstore_users_api/logger"
+	"github.com/a-soliman/bookstore_utils-go/logger"
 	"github.com/a-soliman/bookstore_utils-go/rest_errors"
 )
 
