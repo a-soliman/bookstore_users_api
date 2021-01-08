@@ -4,8 +4,7 @@ go 1.14
 
 require (
 	github.com/a-soliman/bookstore_oauth-go v0.0.0-20210107182246-6d83614b67d0
-	github.com/a-soliman/bookstore_utils-go v0.0.0-20210107175045-ad09a0b3cfad
-	github.com/federicoleon/golang-restclient v0.0.0-20191104170228-162ed620df66 // indirect
+	github.com/a-soliman/bookstore_utils-go v0.0.0-20210107230621-b1e6aeb90a92
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/go-sql-driver/mysql v1.5.0

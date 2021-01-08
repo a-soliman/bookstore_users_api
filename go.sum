@@ -1,19 +1,12 @@
 cloud.google.com/go v0.26.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ=
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
-github.com/a-soliman/bookstore_oauth-go v0.0.0-20210102195911-2115647fb2b6 h1:NwUrychRA/nRu6bZbtIZQXObpYSKolfIDsJNX/+6JvA=
-github.com/a-soliman/bookstore_oauth-go v0.0.0-20210102195911-2115647fb2b6/go.mod h1:uchnHhMxh+VVSGIjDQnqq1wJGg2sRCVu14+RmtzK8xM=
-github.com/a-soliman/bookstore_oauth-go v0.0.0-20210102223355-e63816030776 h1:5U+D/1W+5qQu7ibPt+THZB/clJ3uIg4EMoSwPmUG78Y=
-github.com/a-soliman/bookstore_oauth-go v0.0.0-20210102223355-e63816030776/go.mod h1:2Zenz0kXI0Mn28HrJnPqTMuDw52yUkOfwNQznW8ONMs=
 github.com/a-soliman/bookstore_oauth-go v0.0.0-20210107182246-6d83614b67d0 h1:XKqcFz4n0M7T2+qyAs6wFXx2QtvreA6lB5vHoe/g61o=
 github.com/a-soliman/bookstore_oauth-go v0.0.0-20210107182246-6d83614b67d0/go.mod h1:qVbN3ZHfhIJzO3uFksXe8T5DHq6cF7RBKwsxxDMg/1M=
-github.com/a-soliman/bookstore_utils-go v0.0.0-20210102220327-f04b21423323/go.mod h1:iFbCIxoQ1ZQOYDBwGd5pHYy+8ddA8w2gPfdxA5VqPa0=
-github.com/a-soliman/bookstore_utils-go v0.0.0-20210107144335-5d2dffa76567 h1:r2XeNLKmzFBYKjpMEsuTTCZyllToEkuw9hvsndXPZmE=
-github.com/a-soliman/bookstore_utils-go v0.0.0-20210107144335-5d2dffa76567/go.mod h1:vJBICx4XBJ1NA6p9EBdy7Ogwqlyrhfo8abf0hRS929g=
-github.com/a-soliman/bookstore_utils-go v0.0.0-20210107151210-ccf4eb217e3e h1:JPWXuQ1k7U9xbdbXVpez+swM4bdW5QQgWEgWuVE2Mig=
-github.com/a-soliman/bookstore_utils-go v0.0.0-20210107151210-ccf4eb217e3e/go.mod h1:vJBICx4XBJ1NA6p9EBdy7Ogwqlyrhfo8abf0hRS929g=
 github.com/a-soliman/bookstore_utils-go v0.0.0-20210107175045-ad09a0b3cfad h1:+P7yG6/ILhIVpbpG+ttNhbp5rkmOis9CdYQujBXM1Ng=
 github.com/a-soliman/bookstore_utils-go v0.0.0-20210107175045-ad09a0b3cfad/go.mod h1:vJBICx4XBJ1NA6p9EBdy7Ogwqlyrhfo8abf0hRS929g=
+github.com/a-soliman/bookstore_utils-go v0.0.0-20210107230621-b1e6aeb90a92 h1:Dc8UCAoR9Xml4kLmgMmCs6XOgXuLAErEPGmjXR9CH1A=
+github.com/a-soliman/bookstore_utils-go v0.0.0-20210107230621-b1e6aeb90a92/go.mod h1:vJBICx4XBJ1NA6p9EBdy7Ogwqlyrhfo8abf0hRS929g=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
@@ -57,6 +50,7 @@ github.com/google/go-cmp v0.2.0/go.mod h1:oXzfMopK8JAjlY9xF4vHSVASa0yLyX7SntLO5a
 github.com/google/go-cmp v0.3.0/go.mod h1:8QqcDgzrUqlUb/G2PQTWiueGozuR1884gddMywk6iLU=
 github.com/google/go-cmp v0.3.1/go.mod h1:8QqcDgzrUqlUb/G2PQTWiueGozuR1884gddMywk6iLU=
 github.com/google/go-cmp v0.4.0/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
+github.com/google/go-cmp v0.5.0 h1:/QaMHBdZ26BB3SSst0Iwl10Epc+xhTquomWX0oZEB6w=
 github.com/google/go-cmp v0.5.0/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
 github.com/google/gofuzz v1.0.0/go.mod h1:dBl0BpW6vV/+mYPU4Po3pmUjxk6FQPldtuIdl/M65Eg=
 github.com/google/renameio v0.1.0/go.mod h1:KWCgfxg9yswjAJkECMjeO8J8rahYeXnNhOm40UhjYkI=
@@ -161,6 +155,7 @@ golang.org/x/tools v0.0.0-20191029041327-9cc4af7d6b2c/go.mod h1:b+2E5dAYhXwXZwtn
 golang.org/x/tools v0.0.0-20191029190741-b9c20aec41a5 h1:hKsoRgsbwY1NafxrwTs+k64bikrLBkAgPir1TNCj3Zs=
 golang.org/x/tools v0.0.0-20191029190741-b9c20aec41a5/go.mod h1:b+2E5dAYhXwXZwtnZ6UAqBI28+e2cm9otk0dWdXHAEo=
 golang.org/x/xerrors v0.0.0-20190717185122-a985d3407aa7/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=
+golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543 h1:E7g+9GITq07hpfrRu66IVDexMakfv52eLZ2CXBWiKr4=
 golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543/go.mod h1:I/5z698sn9Ka8TeJc9MKroUUfqBBauWjQqLJ2OPfmY0=
 google.golang.org/appengine v1.1.0/go.mod h1:EbEs0AVv82hx2wNQdGPgUI5lhzA/G0D9YwlJXL52JkM=
 google.golang.org/appengine v1.4.0/go.mod h1:xpcJRLb0r/rnEns0DIKYYv+WjYCduHsrkT7/EB5XEv4=
