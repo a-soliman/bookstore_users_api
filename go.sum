@@ -3,10 +3,14 @@ github.com/BurntSushi/toml v0.3.1 h1:WXkYYl6Yr3qBf1K79EBnL4mak0OimBfB0XUf9Vl28OQ
 github.com/BurntSushi/toml v0.3.1/go.mod h1:xHWCNGjB5oqiDr8zfno3MHue2Ht5sIBksp03qcyfWMU=
 github.com/a-soliman/bookstore_oauth-go v0.0.0-20210107182246-6d83614b67d0 h1:XKqcFz4n0M7T2+qyAs6wFXx2QtvreA6lB5vHoe/g61o=
 github.com/a-soliman/bookstore_oauth-go v0.0.0-20210107182246-6d83614b67d0/go.mod h1:qVbN3ZHfhIJzO3uFksXe8T5DHq6cF7RBKwsxxDMg/1M=
+github.com/a-soliman/bookstore_oauth-go v0.0.0-20210118170757-92a06a0cd1a0 h1:4t21lklg4JD4Eer3s1iOpaByvuV1RXbwDR/wK/Orjx4=
+github.com/a-soliman/bookstore_oauth-go v0.0.0-20210118170757-92a06a0cd1a0/go.mod h1:8viSe+NpduDoOesaJ+Sjnxle9HH/VkYyxLnHJS4Q+yw=
 github.com/a-soliman/bookstore_utils-go v0.0.0-20210107175045-ad09a0b3cfad h1:+P7yG6/ILhIVpbpG+ttNhbp5rkmOis9CdYQujBXM1Ng=
 github.com/a-soliman/bookstore_utils-go v0.0.0-20210107175045-ad09a0b3cfad/go.mod h1:vJBICx4XBJ1NA6p9EBdy7Ogwqlyrhfo8abf0hRS929g=
 github.com/a-soliman/bookstore_utils-go v0.0.0-20210107230621-b1e6aeb90a92 h1:Dc8UCAoR9Xml4kLmgMmCs6XOgXuLAErEPGmjXR9CH1A=
 github.com/a-soliman/bookstore_utils-go v0.0.0-20210107230621-b1e6aeb90a92/go.mod h1:vJBICx4XBJ1NA6p9EBdy7Ogwqlyrhfo8abf0hRS929g=
+github.com/a-soliman/bookstore_utils-go v0.0.0-20210108002208-e60095fa88dc h1:SEusoK0qSFE2LhXt1OhiYADkm5N1z5UjoRdciL7IXko=
+github.com/a-soliman/bookstore_utils-go v0.0.0-20210108002208-e60095fa88dc/go.mod h1:vJBICx4XBJ1NA6p9EBdy7Ogwqlyrhfo8abf0hRS929g=
 github.com/census-instrumentation/opencensus-proto v0.2.1/go.mod h1:f6KPmirojxKA12rnyqOA5BBL4O983OfeGPqjHWSTneU=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=

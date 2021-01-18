@@ -3,8 +3,8 @@ module github.com/a-soliman/bookstore_users_api
 go 1.14
 
 require (
-	github.com/a-soliman/bookstore_oauth-go v0.0.0-20210107182246-6d83614b67d0
-	github.com/a-soliman/bookstore_utils-go v0.0.0-20210107230621-b1e6aeb90a92
+	github.com/a-soliman/bookstore_oauth-go v0.0.0-20210118170757-92a06a0cd1a0
+	github.com/a-soliman/bookstore_utils-go v0.0.0-20210108002208-e60095fa88dc
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/go-sql-driver/mysql v1.5.0
