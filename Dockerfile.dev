@@ -1,0 +1,11 @@
+FROM golang:latest
+
+RUN go get -v github.com/canthefason/go-watcher
+
+RUN go install github.com/canthefason/go-watcher/cmd/watcher
+
+WORKDIR /go/src/github.com/a-soliman/bookstore_users_api
+
+COPY . .
+
+CMD [ "watcher" ]
